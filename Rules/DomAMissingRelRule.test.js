@@ -29,5 +29,5 @@ test('validate:invalid', () => {
   const defects = helper.validate(htmlInvalid, new DomAMissingRelRule());
 
   expect(defects.length).toBe(1);
-  expect(defects[0] = 'Count of <a/> missing rel: 2')
+  expect(defects[0] = 'Count of <a/> missing rel: 2');
 });
