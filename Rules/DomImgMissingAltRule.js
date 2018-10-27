@@ -1,6 +1,6 @@
 const BaseRule = require('./BaseRule');
 
-class DocImgMissingAltRule extends BaseRule {
+class DomImgMissingAltRule extends BaseRule {
   validate({evaluators}) {
     const $ = evaluators.cheerio;
 
@@ -24,4 +24,4 @@ class DocImgMissingAltRule extends BaseRule {
   }
 }
 
-module.exports = DocImgMissingAltRule;
+module.exports = DomImgMissingAltRule;
