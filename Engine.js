@@ -1,3 +1,5 @@
+const BaseReader = require('./Readers/BaseReader');
+
 class Engine {
   constructor() {
     this._reader = null;
@@ -11,6 +13,10 @@ class Engine {
   }
 
   set reader(reader) {
+    if (!(reader instanceof BaseReader)) {
+      throw 'Requires instance of BaseReader';
+    }
+
     this._reader = reader;
 
     return this;
