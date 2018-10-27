@@ -1,4 +1,6 @@
-class DocImgMissingAltRule {
+const BaseRule = require('./BaseRule');
+
+class DocImgMissingAltRule extends BaseRule {
   validate({evaluators}) {
     const $ = evaluators.cheerio;
 
