@@ -1,7 +1,6 @@
 const CheerioEvaluator = require('./CheerioEvaluator');
 
 test('construct', () => {
-  const evaluator = new CheerioEvaluator();
   const html = `
 <html>
 <head>
@@ -16,16 +15,18 @@ test('construct', () => {
 </html>
 `;
 
-  /* Hasn't initialize handler */
+  const evaluator = new CheerioEvaluator({html});
 
-  expect(evaluator.handler).toBe(null);
+  /* Hasn't boot evaluator hence null cheerio instance inside */
 
-  /* Boot and initialize handler as instance of cheerio */
+  expect(evaluator.evaluator).toBe(null);
 
-  evaluator.boot(html);
+  /* Boot */
+
+  evaluator.boot();
 
   /* Test using cheerio */
 
-  expect(evaluator.handler('li').length).toBe(2);
-  expect(evaluator.handler('head title').text()).toBe('TITLE');
+  expect(evaluator.evaluator('li').length).toBe(2);
+  expect(evaluator.evaluator('head title').text()).toBe('TITLE');
 });
