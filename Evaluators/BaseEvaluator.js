@@ -1,11 +1,10 @@
 class BaseEvaluator {
   constructor(params) {
-    this._handler = null;
     this._params = params;
   }
 
-  get handler() {
-    /* User evaluator itself as handler by default */
+  get evaluator() {
+    /* User evaluator itself by default */
 
     return this;
   }

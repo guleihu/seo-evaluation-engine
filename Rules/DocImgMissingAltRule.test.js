@@ -13,7 +13,7 @@ function validate(html) {
   Object.entries(evaluatorSrcs).forEach(entry => {
     entry[1].boot();
 
-    evaluators[entry[0]] = entry[1].handler;
+    evaluators[entry[0]] = entry[1].evaluator;
   });
 
   /* Create rule and validate */

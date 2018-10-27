@@ -17,16 +17,16 @@ test('construct', () => {
 
   const evaluator = new CheerioEvaluator({html});
 
-  /* Hasn't initialize handler */
+  /* Hasn't boot evaluator hence null cheerio instance inside */
 
-  expect(evaluator.handler).toBe(null);
+  expect(evaluator.evaluator).toBe(null);
 
-  /* Boot and initialize handler as instance of cheerio */
+  /* Boot */
 
   evaluator.boot();
 
   /* Test using cheerio */
 
-  expect(evaluator.handler('li').length).toBe(2);
-  expect(evaluator.handler('head title').text()).toBe('TITLE');
+  expect(evaluator.evaluator('li').length).toBe(2);
+  expect(evaluator.evaluator('head title').text()).toBe('TITLE');
 });

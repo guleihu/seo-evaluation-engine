@@ -3,14 +3,20 @@ const cheerio = require('cheerio');
 const BaseEvaluator = require('./BaseEvaluator');
 
 class CheerioEvaluator extends BaseEvaluator {
-  get handler() {
-    return this._handler;
+  constructor(params) {
+    super(params);
+
+    this.cheerio = null;
+  }
+
+  get evaluator() {
+    return this.cheerio;
   }
 
   boot() {
     const html = this.params.html;
 
-    this._handler = cheerio.load(html);
+    this.cheerio = cheerio.load(html);
   }
 }
 
