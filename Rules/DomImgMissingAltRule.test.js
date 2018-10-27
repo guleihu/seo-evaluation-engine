@@ -29,5 +29,5 @@ test('validate:invalid', () => {
   const defects = helper.validate(htmlInvalid, new DomImgMissingAltRule());
 
   expect(defects.length).toBe(1);
-  expect(defects[0] = 'Count of <img/> missing alt: 2')
+  expect(defects[0] = 'Count of <img/> missing alt: 2');
 });
