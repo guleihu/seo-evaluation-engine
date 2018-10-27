@@ -19,7 +19,7 @@ test('construct', () => {
 
   /* Hasn't boot evaluator hence null cheerio instance inside */
 
-  expect(evaluator.evaluator).toBe(null);
+  expect(evaluator.$).toBe(null);
 
   /* Boot */
 
@@ -27,6 +27,6 @@ test('construct', () => {
 
   /* Test using cheerio */
 
-  expect(evaluator.evaluator('li').length).toBe(2);
-  expect(evaluator.evaluator('head title').text()).toBe('TITLE');
+  expect(evaluator.$('li').length).toBe(2);
+  expect(evaluator.$('head title').text()).toBe('TITLE');
 });
