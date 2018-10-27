@@ -1,14 +1,17 @@
 {
-  "name"           : "seo-evaluation-engine",
-  "version"        : "1.0.0",
-  "description"    : "An Evaluation Engine for SEO factors",
-  "main"           : "index.js",
-  "author"         : "Gulei Hu",
-  "license"        : "MIT",
+  "name": "seo-evaluation-engine",
+  "version": "1.0.0",
+  "description": "An Evaluation Engine for SEO factors",
+  "main": "index.js",
+  "author": "Gulei Hu",
+  "license": "MIT",
   "devDependencies": {
     "jest": "^23.6.0"
   },
-  "scripts"        : {
+  "scripts": {
     "test": "jest"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2"
   }
 }

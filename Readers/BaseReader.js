@@ -1,9 +1,10 @@
 class BaseReader {
-  constructor() {
+  constructor(input) {
     this._html = null;
+    this._input = input;
   }
 
-  read(input) {
+  read() {
     throw 'Method not implemented: read';
   }
 
