@@ -1,10 +1,11 @@
 const Engine = require('./Engine');
 const BaseReader = require('./Readers/BaseReader');
+const BaseWriter = require('./Writers/BaseWriter');
 
 class DummyReader extends BaseReader {
 }
 
-class DummyWriter {
+class DummyWriter extends BaseWriter {
 }
 
 class DummyEvaluator {
