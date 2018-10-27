@@ -9,7 +9,7 @@ class CheerioEvaluator extends BaseEvaluator {
     this.cheerio = null;
   }
 
-  get evaluator() {
+  get $() {
     return this.cheerio;
   }
 

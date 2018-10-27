@@ -2,7 +2,7 @@ const BaseRule = require('./BaseRule');
 
 class DomAMissingRelRule extends BaseRule {
   validate({evaluators}) {
-    const $ = evaluators.cheerio;
+    const $ = evaluators.cheerio.$;
 
     let count = 0;
 

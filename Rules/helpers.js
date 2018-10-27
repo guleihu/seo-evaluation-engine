@@ -1,18 +1,14 @@
 const CheerioEvaluator = require('../Evaluators/CheerioEvaluator');
 
 module.exports.validate = (html, rule) => {
-  /* Prepare evaluators */
+  /* Boot evaluators */
 
-  const evaluatorSrcs = {
+  const evaluators = {
     'cheerio': new CheerioEvaluator({html}),
   };
 
-  const evaluators = {};
-
-  Object.entries(evaluatorSrcs).forEach(entry => {
-    entry[1].boot();
-
-    evaluators[entry[0]] = entry[1].evaluator;
+  Object.keys(evaluators).forEach(key => {
+    evaluators[key].boot();
   });
 
   /* Validate */

@@ -3,12 +3,6 @@ class BaseEvaluator {
     this._params = params;
   }
 
-  get evaluator() {
-    /* User evaluator itself by default */
-
-    return this;
-  }
-
   get params() {
     return this._params;
   }
