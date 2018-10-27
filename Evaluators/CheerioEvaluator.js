@@ -7,7 +7,9 @@ class CheerioEvaluator extends BaseEvaluator {
     return this._handler;
   }
 
-  boot(html) {
+  boot() {
+    const html = this.params.html;
+
     this._handler = cheerio.load(html);
   }
 }
