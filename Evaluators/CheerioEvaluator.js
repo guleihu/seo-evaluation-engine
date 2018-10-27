@@ -1,10 +1,8 @@
 const cheerio = require('cheerio');
 
-class CheerioEvaluator {
-  constructor() {
-    this._handler = null;
-  }
+const BaseEvaluator = require('./BaseEvaluator');
 
+class CheerioEvaluator extends BaseEvaluator {
   get handler() {
     return this._handler;
   }
