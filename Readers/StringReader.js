@@ -1,8 +1,8 @@
 const BaseReader = require('./BaseReader');
 
 class StringReader extends BaseReader {
-  read({html}) {
-    this._html = html;
+  read() {
+    this._html = this._input.html;
   }
 }
 
