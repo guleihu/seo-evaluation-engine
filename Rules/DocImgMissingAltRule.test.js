@@ -1,27 +1,5 @@
+const helper = require('./helpers');
 const DocImgMissingAltRule = require('./DocImgMissingAltRule');
-const CheerioEvaluator = require('../Evaluators/CheerioEvaluator');
-
-function validate(html) {
-  /* Prepare evaluators */
-
-  const evaluatorSrcs = {
-    'cheerio': new CheerioEvaluator({html}),
-  };
-
-  const evaluators = {};
-
-  Object.entries(evaluatorSrcs).forEach(entry => {
-    entry[1].boot();
-
-    evaluators[entry[0]] = entry[1].evaluator;
-  });
-
-  /* Create rule and validate */
-
-  const rule = new DocImgMissingAltRule();
-
-  return rule.validate({evaluators});
-}
 
 test('validate:valid', () => {
   const htmlValid = `
@@ -33,13 +11,13 @@ test('validate:valid', () => {
 </html>  
 `;
 
-  const defects = validate(htmlValid);
+  const defects = helper.validate(htmlValid, new DocImgMissingAltRule());
 
   expect(defects).toEqual([]);
 });
 
 test('validate:invalid', () => {
-  const htmlValid = `
+  const htmlInvalid = `
 <html>
 <body>
 <img src="" alt="">
@@ -48,7 +26,7 @@ test('validate:invalid', () => {
 </html>  
 `;
 
-  const defects = validate(htmlValid);
+  const defects = helper.validate(htmlInvalid, new DocImgMissingAltRule());
 
   expect(defects.length).toBe(1);
   expect(defects[0] = 'Count of <img/> missing alt: 2')
