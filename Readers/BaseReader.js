@@ -4,7 +4,7 @@ class BaseReader {
   }
 
   read(input) {
-    // To be implemented
+    throw 'Method not implemented: read';
   }
 
   get html() {

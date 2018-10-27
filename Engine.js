@@ -1,4 +1,5 @@
 const BaseReader = require('./Readers/BaseReader');
+const BaseWriter = require('./Writers/BaseWriter');
 
 class Engine {
   constructor() {
@@ -27,6 +28,10 @@ class Engine {
   }
 
   set writer(writer) {
+    if (!(writer instanceof BaseWriter)) {
+      throw 'Require instance of BaseWriter';
+    }
+
     this._writer = writer;
 
     return this;
