@@ -6,10 +6,13 @@
   "author": "Gulei Hu",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "vuepress": "^1.0.0-alpha.17"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2"
