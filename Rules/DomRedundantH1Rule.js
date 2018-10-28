@@ -1,7 +1,7 @@
 const BaseRule = require('./BaseRule');
 
 class DomRedundantH1Rule extends BaseRule {
-  validate({evaluators}) {
+  evaluate({evaluators}) {
     const count = evaluators.cheerio.$('h1').length;
 
     if (count <= 1) {

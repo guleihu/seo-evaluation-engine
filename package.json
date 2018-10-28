@@ -1,20 +1,20 @@
 {
-  "name": "seo-evaluation-engine",
-  "version": "1.0.0",
-  "description": "An Evaluation Engine for SEO factors",
-  "main": "index.js",
-  "author": "Gulei Hu",
-  "license": "MIT",
+  "name"           : "@guleihu/seo-evaluation-engine",
+  "version"        : "1.0.0",
+  "description"    : "An Evaluation Engine for SEO defects",
+  "main"           : "index.js",
+  "author"         : "Gulei Hu",
+  "license"        : "MIT",
   "devDependencies": {
-    "jest": "^23.6.0",
+    "jest"    : "^23.6.0",
     "vuepress": "^1.0.0-alpha.17"
   },
-  "scripts": {
-    "test": "jest",
-    "docs:dev": "vuepress dev docs",
+  "scripts"        : {
+    "test"      : "jest",
+    "docs:dev"  : "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
-  "dependencies": {
+  "dependencies"   : {
     "cheerio": "^1.0.0-rc.2"
   }
 }

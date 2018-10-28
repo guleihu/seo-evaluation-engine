@@ -13,7 +13,7 @@ test('validate:valid', () => {
 </html>
 `;
 
-  const defects = helper.validate(htmlValid, new DomHeadCheckRule());
+  const defects = helper.evaluate(htmlValid, new DomHeadCheckRule());
 
   expect(defects).toEqual([]);
 });
@@ -29,7 +29,7 @@ test('validate:invalid:missing-title', () => {
 </html>  
 `;
 
-  const defects = helper.validate(htmlInvalid, new DomHeadCheckRule());
+  const defects = helper.evaluate(htmlInvalid, new DomHeadCheckRule());
 
   expect(defects.length).toBe(1);
   expect(defects[0] = 'Missing <title/> in <head/>');
@@ -46,7 +46,7 @@ test('validate:invalid:missing-meta-description', () => {
 </html>  
 `;
 
-  const defects = helper.validate(htmlInvalid, new DomHeadCheckRule());
+  const defects = helper.evaluate(htmlInvalid, new DomHeadCheckRule());
 
   expect(defects.length).toBe(1);
   expect(defects[0] = 'Missing <meta name="description"/> in <head/>');
@@ -63,7 +63,7 @@ test('validate:invalid:missing-meta-keywords', () => {
 </html>  
 `;
 
-  const defects = helper.validate(htmlInvalid, new DomHeadCheckRule());
+  const defects = helper.evaluate(htmlInvalid, new DomHeadCheckRule());
 
   expect(defects.length).toBe(1);
   expect(defects[0] = 'Missing <meta name="keywords"/> in <head/>');
@@ -77,7 +77,7 @@ test('validate:invalid:missing-all', () => {
 </html>  
 `;
 
-  const defects = helper.validate(htmlInvalid, new DomHeadCheckRule());
+  const defects = helper.evaluate(htmlInvalid, new DomHeadCheckRule());
   const expected = [
     'Missing <title/> in <head/>',
     'Missing <meta name="description"/> in <head/>',

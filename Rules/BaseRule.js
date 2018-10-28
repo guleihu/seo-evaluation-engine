@@ -7,7 +7,7 @@ class BaseRule {
     return this._params;
   }
 
-  validate(context) {
+  evaluate(context) {
     throw 'Method not implemented: validate';
   }
 }

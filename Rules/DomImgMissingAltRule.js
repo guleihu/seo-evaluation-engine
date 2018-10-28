@@ -1,7 +1,7 @@
 const BaseRule = require('./BaseRule');
 
 class DomImgMissingAltRule extends BaseRule {
-  validate({evaluators}) {
+  evaluate({evaluators}) {
     const count = evaluators.cheerio.countTagsMissingAttr('img', 'alt');
 
     if (count < 1) {
