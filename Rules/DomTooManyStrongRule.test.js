@@ -10,7 +10,7 @@ test('validate:valid', () => {
 </html>  
 `;
 
-  const defects = helper.validate(
+  const defects = helper.evaluate(
     htmlValid,
     new DomTooManyStrongRule({
       max: 15,
@@ -44,7 +44,7 @@ test('validate:invalid', () => {
 </html>  
 `;
 
-  const defects = helper.validate(
+  const defects = helper.evaluate(
     htmlInvalid,
     new DomTooManyStrongRule({
       max: 15,

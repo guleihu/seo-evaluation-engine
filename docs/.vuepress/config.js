@@ -5,6 +5,7 @@ module.exports = {
     sidebar: [
       '/',
       '/GETTING_STARTED',
+      '/OVERVIEW',
       '/USAGE',
       '/EXTENDING_FUNCTIONALITY',
       '/TESTING',

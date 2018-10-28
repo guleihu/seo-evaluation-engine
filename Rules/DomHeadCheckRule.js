@@ -1,7 +1,7 @@
 const BaseRule = require('./BaseRule');
 
 class DomHeadCheckRule extends BaseRule {
-  validate({evaluators}) {
+  evaluate({evaluators}) {
     const defects = [];
     const $ = evaluators.cheerio.$;
 
