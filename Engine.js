@@ -1,5 +1,7 @@
 const BaseReader = require('./Readers/BaseReader');
 const BaseWriter = require('./Writers/BaseWriter');
+const BaseEvaluator = require('./Evaluators/BaseEvaluator');
+const BaseRule = require('./Rules/BaseRule');
 const CheerioEvaluator = require('./Evaluators/CheerioEvaluator');
 
 class Engine {
@@ -96,12 +98,20 @@ class Engine {
       throw 'Evaluator already registered: ' + name;
     }
 
+    if (!(evaluator instanceof BaseEvaluator)) {
+      throw 'Require instance of BaseEvaluator';
+    }
+
     this._evaluators[name] = evaluator;
 
     return this;
   }
 
   addRule(rule) {
+    if (!(rule instanceof BaseRule)) {
+      throw 'Require instance of BaseRule';
+    }
+
     this._rules.push(rule);
 
     return this;

@@ -1,6 +1,8 @@
 const Engine = require('./Engine');
 const BaseReader = require('./Readers/BaseReader');
 const BaseWriter = require('./Writers/BaseWriter');
+const BaseEvaluator = require('./Evaluators/BaseEvaluator');
+const BaseRule = require('./Rules/BaseRule');
 const StringReader = require('./Readers/StringReader');
 const ConsoleWriter = require('./Writers/ConsoleWriter');
 const CheerioEvaluator = require('./Evaluators/CheerioEvaluator');
@@ -13,10 +15,10 @@ class DummyReader extends BaseReader {
 class DummyWriter extends BaseWriter {
 }
 
-class DummyEvaluator {
+class DummyEvaluator extends BaseEvaluator {
 }
 
-class DummyRule {
+class DummyRule extends BaseRule {
 }
 
 describe('configure', () => {
