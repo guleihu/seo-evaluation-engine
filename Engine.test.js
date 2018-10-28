@@ -134,7 +134,8 @@ describe('configure', () => {
   });
 });
 
-const testHtml = `
+describe.only('evaluate', () => {
+  const testHtml = `
 <html>
 <head>
 <!-- Missing <title/> -->
@@ -149,7 +150,11 @@ const testHtml = `
 </html>
 `;
 
-describe.only('evaluate', () => {
+  const expectedDefects = [
+    'Missing <title/> in <head/>',
+    'Redundant <h1/>',
+  ];
+
   test('string-in-console-out', () => {
     const engine = Engine.create({
       reader: new StringReader({html: testHtml}),
@@ -169,10 +174,7 @@ describe.only('evaluate', () => {
         return item.value;
       });
 
-      expect(results).toEqual(expect.arrayContaining([
-        'Missing <title/> in <head/>',
-        'Redundant <h1/>',
-      ]));
+      expect(results).toEqual(expect.arrayContaining(expectedDefects));
     })
   });
 });
