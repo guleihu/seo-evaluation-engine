@@ -1,21 +1,23 @@
-const fs = require('fs');
+const {testFileOutput} = require('../helpers');
 const FileWriter = require('./FileWriter');
 
 test('write', () => {
-  const tmpPath = `/tmp/test-output-${Date.now()}.txt`;
+  const writing = (tmpPath) => {
+    const writer = new FileWriter({
+      path: tmpPath,
+    });
 
-  const writer = new FileWriter({
-    path: tmpPath,
-  });
+    console.log(`Writing output to path: ${tmpPath}`);
 
-  console.log(`Writing output to path: ${tmpPath}`);
+    writer.write([
+      '#1',
+      '#2',
+    ]);
+  };
 
-  writer.write([
-    '#1',
-    '#2',
-  ]);
+  const testing = (output) => {
+    expect(output).toBe("#1\n#2");
+  };
 
-  const output = fs.readFileSync(tmpPath, 'utf8');
-
-  expect(output).toBe("#1\n#2");
+  testFileOutput(writing, testing);
 });
