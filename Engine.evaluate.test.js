@@ -1,4 +1,4 @@
-const {mockConsoleLog, testFileOutput, testStreamOutput} = require('./helpers');
+const {testConsoleLog, testFileOutput, testStreamOutput} = require('./helpers');
 const Engine = require('./Engine');
 const StringReader = require('./Readers/StringReader');
 const ConsoleWriter = require('./Writers/ConsoleWriter');
@@ -39,7 +39,7 @@ test('string-in-console-out', () => {
     rules,
   });
 
-  mockConsoleLog((mockedConsoleLog) => {
+  testConsoleLog((mockedConsoleLog) => {
     engine.evaluate();
 
     expect(mockedConsoleLog.mock.calls.length).toBe(2);

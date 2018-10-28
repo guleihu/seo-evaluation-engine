@@ -1,10 +1,10 @@
 const ConsoleWriter = require('./ConsoleWriter');
-const {mockConsoleLog} = require('../helpers');
+const {testConsoleLog} = require('../helpers');
 
 test('basic write', () => {
   const writer = new ConsoleWriter();
 
-  mockConsoleLog((mockedConsoleLog) => {
+  testConsoleLog((mockedConsoleLog) => {
     writer.write([
       'TEST',
     ]);

@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-module.exports.mockConsoleLog = (callback) => {
+module.exports.testConsoleLog = (callback) => {
   const consoleLog = console.log;
   const mockedConsoleLog = jest.fn(input => {
     return input;
