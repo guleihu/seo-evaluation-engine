@@ -8,4 +8,4 @@ A modular Node.js package for evaluating SEO defects from an HTML input.
 
 ## Documentation
 
-See https://guleihu.github.io/seo-evaluation-engine/
+See documentation [here](https://guleihu.github.io/seo-evaluation-engine/).
