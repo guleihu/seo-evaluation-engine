@@ -1,26 +1,16 @@
+const fs = require('fs');
 const {testConsoleLog, testFileOutput, testStreamOutput} = require('./helpers');
 const Engine = require('./Engine');
 const StringReader = require('./Readers/StringReader');
+const FileReader = require('./Readers/FileReader');
 const ConsoleWriter = require('./Writers/ConsoleWriter');
 const FileWriter = require('./Writers/FileWriter');
 const StreamWriter = require('./Writers/StreamWriter');
 const DomHeadCheckRule = require('./Rules/DomHeadCheckRule');
 const DomRedundantH1Rule = require('./Rules/DomRedundantH1Rule');
 
-const testHtml = `
-<html>
-<head>
-<!-- Missing <title/> -->
-<meta name="description" content="DESC">
-<meta name="keywords" content="KEYWORDS">
-</head>
-<body>
-<!-- Redundant <h1/> -->
-<h1>#1</h1>
-<h1>#2</h1>
-</body>
-</html>
-`;
+const testHtmlPath = __dirname + '/Engine.evaluate.test.html';
+const testHtml = fs.readFileSync(testHtmlPath);
 
 const rules = [
   new DomHeadCheckRule(),
@@ -89,4 +79,23 @@ test('string-in-stream-out', () => {
   };
 
   testStreamOutput(writing, testing);
+});
+
+test('file-in-console-out', () => {
+  const writing = () => {
+    const engine = Engine.create({
+      reader: new FileReader({path: testHtmlPath}),
+      writer: new ConsoleWriter(),
+      rules,
+    });
+
+    engine.evaluate();
+  };
+
+  const testing = (mockedConsoleLog, resultValues) => {
+    expect(mockedConsoleLog.mock.calls.length).toBe(2);
+    expect(resultValues).toEqual(expect.arrayContaining(expectedDefects));
+  };
+
+  testConsoleLog(writing, testing);
 });
