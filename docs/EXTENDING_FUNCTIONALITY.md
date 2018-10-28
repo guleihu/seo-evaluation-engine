@@ -17,7 +17,7 @@ class FileReader extends BaseReader {
       throw 'Missing parameter: path';
     }
 
-    /* Put the string of HTML to this.html so it can be picked up later on */
+    /* Put the string of HTML to this.html so it can be picked up later */
     this.html = fs.readFileSync(path, 'utf8');
   }
 }
