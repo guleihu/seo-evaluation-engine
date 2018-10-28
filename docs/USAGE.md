@@ -5,7 +5,7 @@
 Example:
 
 ```javascript
-/* Create an engine using factory static method */
+/* Create an engine using static factory method */
 
 const engine = Engine.create({
   reader: new StringReader({html}),
