@@ -3,6 +3,7 @@ const BaseReader = require('./Readers/BaseReader');
 const BaseWriter = require('./Writers/BaseWriter');
 const StringReader = require('./Readers/StringReader');
 const ConsoleWriter = require('./Writers/ConsoleWriter');
+const CheerioEvaluator = require('./Evaluators/CheerioEvaluator');
 const DomHeadCheckRule = require('./Rules/DomHeadCheckRule');
 const DomRedundantH1Rule = require('./Rules/DomRedundantH1Rule');
 
@@ -77,6 +78,57 @@ describe('configure', () => {
 
     expect(engine.rules[0]).toBe(rule);
   });
+
+  test('construct', () => {
+    const reader = new DummyReader();
+    const writer = new DummyWriter();
+    const evaluator = new DummyEvaluator();
+    const rule = new DummyRule();
+
+    const engine = new Engine({
+      reader,
+      writer,
+      evaluators: {
+        dummy: evaluator,
+      },
+      rules     : [
+        rule,
+      ],
+    });
+
+    expect(engine.reader).toBe(reader);
+    expect(engine.writer).toBe(writer);
+    expect(Object.keys(engine.evaluators).length).toBe(1);
+    expect(engine.evaluators.dummy).toBe(evaluator);
+    expect(engine.rules.length).toBe(1);
+    expect(engine.rules[0]).toBe(rule);
+  });
+
+  test('create', () => {
+    const reader = new DummyReader();
+    const writer = new DummyWriter();
+    const evaluator = new DummyEvaluator();
+    const rule = new DummyRule();
+
+    const engine = Engine.create({
+      reader,
+      writer,
+      evaluators: {
+        dummy: evaluator,
+      },
+      rules     : [
+        rule,
+      ],
+    });
+
+    expect(engine.reader).toBe(reader);
+    expect(engine.writer).toBe(writer);
+    expect(Object.keys(engine.evaluators).length).toBe(2);
+    expect(engine.evaluators.cheerio instanceof CheerioEvaluator).toBe(true);
+    expect(engine.evaluators.dummy).toBe(evaluator);
+    expect(engine.rules.length).toBe(1);
+    expect(engine.rules[0]).toBe(rule);
+  });
 });
 
 const testHtml = `
@@ -96,12 +148,12 @@ const testHtml = `
 
 describe('evaluate', () => {
   test('string-in-console-out', () => {
-    const engine = Engine({
+    const engine = new Engine({
       reader: new StringReader({html: testHtml}),
       writer: new ConsoleWriter(),
       rules : [
         new DomHeadCheckRule(),
-        new DomRedundantH1Rule(),f
+        new DomRedundantH1Rule(),
       ],
     });
   });
