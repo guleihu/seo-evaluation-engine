@@ -1,6 +1,14 @@
 const BaseRule = require('./BaseRule');
 
 class DomTooManyStrongRule extends BaseRule {
+  constructor(params) {
+    if (isNaN(params.max)) {
+      params.max = 15;
+    }
+
+    super(params);
+  }
+
   validate({evaluators}) {
     const max = this.params.max;
 

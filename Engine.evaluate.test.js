@@ -7,20 +7,32 @@ const StreamReader = require('./Readers/StreamReader');
 const ConsoleWriter = require('./Writers/ConsoleWriter');
 const FileWriter = require('./Writers/FileWriter');
 const StreamWriter = require('./Writers/StreamWriter');
+
+const DomAMissingRelRule = require('./Rules/DomAMissingRelRule');
 const DomHeadCheckRule = require('./Rules/DomHeadCheckRule');
+const DomImgMissingAltRule = require('./Rules/DomImgMissingAltRule');
 const DomRedundantH1Rule = require('./Rules/DomRedundantH1Rule');
+const DomTooManyStrongRule = require('./Rules/DomTooManyStrongRule');
 
 const testHtmlPath = __dirname + '/Engine.evaluate.test.html';
 const testHtml = fs.readFileSync(testHtmlPath);
 
 const rules = [
+  new DomAMissingRelRule(),
   new DomHeadCheckRule(),
+  new DomImgMissingAltRule(),
   new DomRedundantH1Rule(),
+  new DomTooManyStrongRule({max: 1}),
 ];
 
 const expectedDefects = [
+  'Count of <a/> missing rel: 1',
   'Missing <title/> in <head/>',
+  'Missing <meta name="description"/> in <head/>',
+  'Missing <meta name="keywords"/> in <head/>',
+  'Count of <img/> missing alt: 1',
   'Redundant <h1/>',
+  'Too many <strong/> more than 1: 2',
 ];
 
 test('string-in-console-out', () => {
@@ -35,7 +47,7 @@ test('string-in-console-out', () => {
   };
 
   const testing = (mockedConsoleLog, resultValues) => {
-    expect(mockedConsoleLog.mock.calls.length).toBe(2);
+    expect(mockedConsoleLog.mock.calls.length).toBe(7);
     expect(resultValues).toEqual(expect.arrayContaining(expectedDefects));
   };
 
@@ -56,6 +68,7 @@ test('string-in-file-out', () => {
   const testing = (output) => {
     const actualDefects = output.split("\n");
 
+    expect(actualDefects.length).toBe(7);
     expect(actualDefects).toEqual(expect.arrayContaining(expectedDefects));
   };
 
@@ -76,6 +89,7 @@ test('string-in-stream-out', () => {
   const testing = (output) => {
     const actualDefects = output.split("\n");
 
+    expect(actualDefects.length).toBe(7);
     expect(actualDefects).toEqual(expect.arrayContaining(expectedDefects));
   };
 
@@ -94,14 +108,14 @@ test('file-in-console-out', () => {
   };
 
   const testing = (mockedConsoleLog, resultValues) => {
-    expect(mockedConsoleLog.mock.calls.length).toBe(2);
+    expect(mockedConsoleLog.mock.calls.length).toBe(7);
     expect(resultValues).toEqual(expect.arrayContaining(expectedDefects));
   };
 
   testConsoleLog(writing, testing);
 });
 
-test.only('stream-in-console-out', () => {
+test('stream-in-console-out', () => {
   const writing = () => {
     const stream = fs.createReadStream(testHtmlPath);
     const engine = Engine.create({
@@ -114,7 +128,7 @@ test.only('stream-in-console-out', () => {
   };
 
   const testing = (mockedConsoleLog, resultValues) => {
-    expect(mockedConsoleLog.mock.calls.length).toBe(2);
+    expect(mockedConsoleLog.mock.calls.length).toBe(7);
     expect(resultValues).toEqual(expect.arrayContaining(expectedDefects));
   };
 
