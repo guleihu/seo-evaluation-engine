@@ -1,5 +1,5 @@
 class BaseReader {
-  constructor(input) {
+  constructor(input = {}) {
     this._html = null;
     this._input = input;
   }
