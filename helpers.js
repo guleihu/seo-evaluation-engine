@@ -8,15 +8,26 @@ module.exports.testConsoleLog = (writing, testing) => {
 
   console.log = mockedConsoleLog;
 
-  writing();
+  const rs = writing();
 
-  const results = mockedConsoleLog.mock.results.map(item => {
-    return item.value;
-  });
+  const runTesting = () => {
+    const results = mockedConsoleLog.mock.results.map(item => {
+      return item.value;
+    });
 
-  testing(mockedConsoleLog, results);
+    testing(mockedConsoleLog, results);
 
-  console.log = consoleLog;
+    console.log = consoleLog;
+  };
+
+  if (rs instanceof Promise) {
+    return rs.then(() => {
+      return runTesting();
+    });
+  }
+  else {
+    return runTesting();
+  }
 };
 
 module.exports.testFileOutput = (writing, testing) => {

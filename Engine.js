@@ -117,13 +117,7 @@ class Engine {
     return this;
   }
 
-  evaluate() {
-    /* Prepare HTML */
-
-    this.reader.read();
-
-    const html = this.reader.html;
-
+  runEvaluators(html) {
     /* Boot evaluators */
 
     Object.keys(this.evaluators).forEach(key => {
@@ -143,6 +137,19 @@ class Engine {
     });
 
     return this.writer.write(defects);
+  };
+
+  evaluate() {
+    const rs = this.reader.read();
+
+    if (rs instanceof Promise) {
+      return rs.then(() => {
+        return Promise.resolve(this.runEvaluators(this.reader.html))
+      });
+    }
+    else {
+      return this.runEvaluators(this.reader.html);
+    }
   }
 }
 

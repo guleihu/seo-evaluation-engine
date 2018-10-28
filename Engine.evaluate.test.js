@@ -3,6 +3,7 @@ const {testConsoleLog, testFileOutput, testStreamOutput} = require('./helpers');
 const Engine = require('./Engine');
 const StringReader = require('./Readers/StringReader');
 const FileReader = require('./Readers/FileReader');
+const StreamReader = require('./Readers/StreamReader');
 const ConsoleWriter = require('./Writers/ConsoleWriter');
 const FileWriter = require('./Writers/FileWriter');
 const StreamWriter = require('./Writers/StreamWriter');
@@ -90,6 +91,26 @@ test('file-in-console-out', () => {
     });
 
     engine.evaluate();
+  };
+
+  const testing = (mockedConsoleLog, resultValues) => {
+    expect(mockedConsoleLog.mock.calls.length).toBe(2);
+    expect(resultValues).toEqual(expect.arrayContaining(expectedDefects));
+  };
+
+  testConsoleLog(writing, testing);
+});
+
+test.only('stream-in-console-out', () => {
+  const writing = () => {
+    const stream = fs.createReadStream(testHtmlPath);
+    const engine = Engine.create({
+      reader: new StreamReader({stream}),
+      writer: new ConsoleWriter(),
+      rules,
+    });
+
+    return engine.evaluate();
   };
 
   const testing = (mockedConsoleLog, resultValues) => {
