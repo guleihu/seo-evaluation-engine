@@ -23,7 +23,9 @@ class CheerioEvaluator extends BaseEvaluator {
     this.$(tag).each((i, tagEl) => {
       const attrText = this.$(tagEl).attr(attr);
 
-      if (attrText.trim().length < 1) {
+      if (typeof attrText !== 'string') {
+        count++;
+      } else if (attrText.trim().length < 1) {
         count++;
       }
     });

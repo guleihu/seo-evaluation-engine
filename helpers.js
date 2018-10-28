@@ -11,13 +11,13 @@ module.exports.testConsoleLog = (writing, testing) => {
   const rs = writing();
 
   const runTesting = () => {
+    console.log = consoleLog;
+
     const results = mockedConsoleLog.mock.results.map(item => {
       return item.value;
     });
 
     testing(mockedConsoleLog, results);
-
-    console.log = consoleLog;
   };
 
   if (rs instanceof Promise) {
