@@ -1,22 +1,19 @@
 const ConsoleWriter = require('./ConsoleWriter');
+const {testConsoleLog} = require('../helpers');
 
-test('basic write', () => {
-  const writer = new ConsoleWriter();
+test('write', () => {
+  const writing = () => {
+    const writer = new ConsoleWriter();
 
-  const consoleLog = console.log;
+    writer.write([
+      'TEST',
+    ]);
+  };
 
-  const mockedConsoleLog = jest.fn(input => {
-    return input;
-  });
+  const testing = (mockedConsoleLog, resultValues) => {
+    expect(mockedConsoleLog.mock.calls.length).toBe(1);
+    expect(resultValues[0]).toBe('TEST');
+  };
 
-  console.log = mockedConsoleLog;
-
-  writer.write([
-    'TEST',
-  ]);
-
-  expect(mockedConsoleLog.mock.calls.length).toBe(1);
-  expect(mockedConsoleLog.mock.results[0].value).toBe('TEST');
-
-  console.log = consoleLog;
+  testConsoleLog(writing, testing);
 });

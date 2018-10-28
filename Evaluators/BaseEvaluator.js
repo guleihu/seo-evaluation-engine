@@ -1,5 +1,5 @@
 class BaseEvaluator {
-  constructor(params) {
+  constructor(params = {}) {
     this._params = params;
   }
 
@@ -7,7 +7,7 @@ class BaseEvaluator {
     return this._params;
   }
 
-  boot() {
+  boot(context) {
     /* Do nothing by default */
   }
 }

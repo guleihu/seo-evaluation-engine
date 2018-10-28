@@ -4,11 +4,11 @@ module.exports.validate = (html, rule) => {
   /* Boot evaluators */
 
   const evaluators = {
-    'cheerio': new CheerioEvaluator({html}),
+    'cheerio': new CheerioEvaluator(),
   };
 
   Object.keys(evaluators).forEach(key => {
-    evaluators[key].boot();
+    evaluators[key].boot({html});
   });
 
   /* Validate */

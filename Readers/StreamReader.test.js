@@ -1,9 +1,10 @@
+const fs = require('fs');
 const StreamReader = require('./StreamReader');
 
 test('read', () => {
-  const reader = new StreamReader({
-    path: __dirname + '/StreamReader.test.html',
-  });
+  const stream = fs.createReadStream(__dirname + '/StreamReader.test.html');
+
+  const reader = new StreamReader({stream});
 
   return reader
     .read()

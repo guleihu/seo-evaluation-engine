@@ -15,7 +15,7 @@ test('construct', () => {
 </html>
 `;
 
-  const evaluator = new CheerioEvaluator({html});
+  const evaluator = new CheerioEvaluator();
 
   /* Hasn't boot evaluator hence null cheerio instance inside */
 
@@ -23,7 +23,7 @@ test('construct', () => {
 
   /* Boot */
 
-  evaluator.boot();
+  evaluator.boot({html});
 
   /* Test using cheerio */
 

@@ -1,11 +1,9 @@
 const Engine = require('./Engine');
 const BaseReader = require('./Readers/BaseReader');
 const BaseWriter = require('./Writers/BaseWriter');
-const StringReader = require('./Readers/StringReader');
-const ConsoleWriter = require('./Writers/ConsoleWriter');
+const BaseEvaluator = require('./Evaluators/BaseEvaluator');
+const BaseRule = require('./Rules/BaseRule');
 const CheerioEvaluator = require('./Evaluators/CheerioEvaluator');
-const DomHeadCheckRule = require('./Rules/DomHeadCheckRule');
-const DomRedundantH1Rule = require('./Rules/DomRedundantH1Rule');
 
 class DummyReader extends BaseReader {
 }
@@ -13,10 +11,10 @@ class DummyReader extends BaseReader {
 class DummyWriter extends BaseWriter {
 }
 
-class DummyEvaluator {
+class DummyEvaluator extends BaseEvaluator {
 }
 
-class DummyRule {
+class DummyRule extends BaseRule {
 }
 
 describe('configure', () => {
@@ -128,33 +126,5 @@ describe('configure', () => {
     expect(engine.evaluators.dummy).toBe(evaluator);
     expect(engine.rules.length).toBe(1);
     expect(engine.rules[0]).toBe(rule);
-  });
-});
-
-const testHtml = `
-<html>
-<head>
-<!-- Missing <title/> -->
-<meta name="description" content="DESC">
-<meta name="keywords" content="KEYWORDS">
-</head>
-<body>
-<!-- Redundant <h1/> -->
-<h1>#1</h1>
-<h1>#2</h1>
-</body>
-</html>
-`;
-
-describe('evaluate', () => {
-  test('string-in-console-out', () => {
-    const engine = new Engine({
-      reader: new StringReader({html: testHtml}),
-      writer: new ConsoleWriter(),
-      rules : [
-        new DomHeadCheckRule(),
-        new DomRedundantH1Rule(),
-      ],
-    });
   });
 });

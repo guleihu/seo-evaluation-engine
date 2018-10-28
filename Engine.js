@@ -1,5 +1,7 @@
 const BaseReader = require('./Readers/BaseReader');
 const BaseWriter = require('./Writers/BaseWriter');
+const BaseEvaluator = require('./Evaluators/BaseEvaluator');
+const BaseRule = require('./Rules/BaseRule');
 const CheerioEvaluator = require('./Evaluators/CheerioEvaluator');
 
 class Engine {
@@ -96,15 +98,58 @@ class Engine {
       throw 'Evaluator already registered: ' + name;
     }
 
+    if (!(evaluator instanceof BaseEvaluator)) {
+      throw 'Require instance of BaseEvaluator';
+    }
+
     this._evaluators[name] = evaluator;
 
     return this;
   }
 
   addRule(rule) {
+    if (!(rule instanceof BaseRule)) {
+      throw 'Require instance of BaseRule';
+    }
+
     this._rules.push(rule);
 
     return this;
+  }
+
+  runEvaluators(html) {
+    /* Boot evaluators */
+
+    Object.keys(this.evaluators).forEach(key => {
+      this.evaluators[key].boot({html})
+    });
+
+    /* Collect defects */
+
+    const defects = [];
+
+    this.rules.forEach(rule => {
+      rule
+        .validate({evaluators: this.evaluators})
+        .forEach(defect => {
+          defects.push(defect);
+        })
+    });
+
+    return this.writer.write(defects);
+  };
+
+  evaluate() {
+    const rs = this.reader.read();
+
+    if (rs instanceof Promise) {
+      return rs.then(() => {
+        return Promise.resolve(this.runEvaluators(this.reader.html))
+      });
+    }
+    else {
+      return this.runEvaluators(this.reader.html);
+    }
   }
 }
 
