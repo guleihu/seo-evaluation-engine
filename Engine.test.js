@@ -1,6 +1,10 @@
 const Engine = require('./Engine');
 const BaseReader = require('./Readers/BaseReader');
 const BaseWriter = require('./Writers/BaseWriter');
+const StringReader = require('./Readers/StringReader');
+const ConsoleWriter = require('./Writers/ConsoleWriter');
+const DomHeadCheckRule = require('./Rules/DomHeadCheckRule');
+const DomRedundantH1Rule = require('./Rules/DomRedundantH1Rule');
 
 class DummyReader extends BaseReader {
 }
@@ -75,3 +79,30 @@ describe('configure', () => {
   });
 });
 
+const testHtml = `
+<html>
+<head>
+<!-- Missing <title/> -->
+<meta name="description" content="DESC">
+<meta name="keywords" content="KEYWORDS">
+</head>
+<body>
+<!-- Redundant <h1/> -->
+<h1>#1</h1>
+<h1>#2</h1>
+</body>
+</html>
+`;
+
+describe('evaluate', () => {
+  test('string-in-console-out', () => {
+    const engine = Engine({
+      reader: new StringReader({html: testHtml}),
+      writer: new ConsoleWriter(),
+      rules : [
+        new DomHeadCheckRule(),
+        new DomRedundantH1Rule(),f
+      ],
+    });
+  });
+});
