@@ -96,12 +96,12 @@ const testHtml = `
 
 describe('evaluate', () => {
   test('string-in-console-out', () => {
-    const engine = Engine({
+    const engine = new Engine({
       reader: new StringReader({html: testHtml}),
       writer: new ConsoleWriter(),
       rules : [
         new DomHeadCheckRule(),
-        new DomRedundantH1Rule(),f
+        new DomRedundantH1Rule(),
       ],
     });
   });
