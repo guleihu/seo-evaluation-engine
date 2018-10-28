@@ -7,8 +7,6 @@ test('write', () => {
       path: tmpPath,
     });
 
-    console.log(`Writing output to path: ${tmpPath}`);
-
     writer.write([
       '#1',
       '#2',
