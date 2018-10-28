@@ -71,24 +71,35 @@ class CheerioEvaluator extends BaseEvaluator {
 
 ## Create a Rule
 
-Take **DomImgMissingAltRule** as example:
+Take **DomHeadCheckRule** as example:
 
 ```javascript
 const BaseRule = require('@guleihu/seo-evaluation-engine/Rules/BaseRule');
 
-class DomImgMissingAltRule extends BaseRule {
+class DomHeadCheckRule extends BaseRule {
+  /* evaluators injected by Engine */
   evaluate({evaluators}) {
-    /* The name of evaluators.* is determined by the key provided in Engine.registerEvaluator(key, evaluator) */    
-    const count = evaluators.cheerio.countTagsMissingAttr('img', 'alt');
+    const defects = [];
+    
+    /* The name of evaluators.* is determined by the key provided in Engine.registerEvaluator(key, evaluator) */       
+    const $ = evaluators.cheerio.$;
 
-    if (count < 1) {
-      return [];
+    if ($('head title').length < 1) {
+      defects.push('Missing <title/> in <head/>');
     }
 
+    if ($('head meta[name=description]').length < 1) {
+      defects.push('Missing <meta name="description"/> in <head/>');
+    }
+
+    if ($('head meta[name=keywords]').length < 1) {
+      defects.push('Missing <meta name="keywords"/> in <head/>');
+    }
+    
+    /* Possible add other tests such as detecting missing meta tag of robots type  */
+
     /* Return any defect as string in an array */
-    return [
-      `Count of <img/> missing alt: ${count}`,
-    ];
+    return defects;
   }
 }
 ```
