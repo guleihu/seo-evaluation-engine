@@ -1,6 +1,6 @@
 # Introduction
 
-A modular Node.js package for evaluating SEO defects from an HTML resource.
+A modular Node.js package for evaluating SEO defects from an HTML input.
 
 ## Features
 - Modular structure for easy extending functionality.
