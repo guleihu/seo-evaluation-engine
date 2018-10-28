@@ -1,7 +1,8 @@
-const {mockConsoleLog} = require('./helpers');
+const {mockConsoleLog, testFileOutput} = require('./helpers');
 const Engine = require('./Engine');
 const StringReader = require('./Readers/StringReader');
 const ConsoleWriter = require('./Writers/ConsoleWriter');
+const FileWriter = require('./Writers/FileWriter');
 const DomHeadCheckRule = require('./Rules/DomHeadCheckRule');
 const DomRedundantH1Rule = require('./Rules/DomRedundantH1Rule');
 
@@ -46,4 +47,27 @@ test('string-in-console-out', () => {
 
     expect(results).toEqual(expect.arrayContaining(expectedDefects));
   })
+});
+
+test('string-in-file-out', () => {
+  const writing = (tmpPath) => {
+    const engine = Engine.create({
+      reader: new StringReader({html: testHtml}),
+      writer: new FileWriter({path: tmpPath}),
+      rules : [
+        new DomHeadCheckRule(),
+        new DomRedundantH1Rule(),
+      ],
+    });
+
+    engine.evaluate();
+  };
+
+  const testing = (output) => {
+    const actualDefects = output.split("\n");
+
+    expect(actualDefects).toEqual(expect.arrayContaining(expectedDefects));
+  };
+
+  testFileOutput(writing, testing);
 });
