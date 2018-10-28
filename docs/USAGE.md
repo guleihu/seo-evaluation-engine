@@ -27,7 +27,7 @@ engine.registerEvaluator(
 engine.evalute();
 ```
 
-- CheerioEvaluator is embedded by default.
+- **CheerioEvaluator** is embedded by default.
 
 ## StringReader
 
@@ -67,7 +67,7 @@ Example:
 new CheerioEvaluator();
 ```
 
-- Cheerio instance will be available at `evaluators.cheerio.$`.
+- **Cheerio** instance will be available at `evaluators.cheerio.$`.
 
 ## DomAMissingRelRule
 

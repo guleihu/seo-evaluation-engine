@@ -2,7 +2,7 @@
 
 ## Create a Reader
 
-Take FileReader as example:
+Take **FileReader** as example:
 
 ```javascript
 const fs = require('fs');
@@ -25,7 +25,7 @@ class FileReader extends BaseReader {
 
 ## Create an Evaluator
 
-Take CheerioEvaluator as example:
+Take **CheerioEvaluator** as example:
 
 ```javascript
 const cheerio = require('cheerio');
@@ -71,7 +71,7 @@ class CheerioEvaluator extends BaseEvaluator {
 
 ## Create a Rule
 
-Take DomImgMissingAltRule as example:
+Take **DomImgMissingAltRule** as example:
 
 ```javascript
 const BaseRule = require('@guleihu/seo-evaluation-engine/Rules/BaseRule');
@@ -95,7 +95,7 @@ class DomImgMissingAltRule extends BaseRule {
 
 ## Create a Writer
 
-Take ConsoleWriter as example:
+Take **ConsoleWriter** as example:
 
 ```javascript
 const BaseWriter = require('@guleihu/seo-evaluation-engine/Writers/BaseWriter');
