@@ -1,7 +1,7 @@
 {
   "name": "seo-evaluation-engine",
   "version": "1.0.0",
-  "description": "An Evaluation Engine for SEO factors",
+  "description": "An Evaluation Engine for SEO defects",
   "main": "index.js",
   "author": "Gulei Hu",
   "license": "MIT",
