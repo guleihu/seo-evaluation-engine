@@ -1,3 +1,4 @@
+const {mockConsoleLog} = require('./helpers');
 const Engine = require('./Engine');
 const BaseReader = require('./Readers/BaseReader');
 const BaseWriter = require('./Writers/BaseWriter');
@@ -148,9 +149,9 @@ const testHtml = `
 </html>
 `;
 
-describe('evaluate', () => {
+describe.only('evaluate', () => {
   test('string-in-console-out', () => {
-    const engine = new Engine({
+    const engine = Engine.create({
       reader: new StringReader({html: testHtml}),
       writer: new ConsoleWriter(),
       rules : [
@@ -158,5 +159,20 @@ describe('evaluate', () => {
         new DomRedundantH1Rule(),
       ],
     });
+
+    mockConsoleLog((mockedConsoleLog) => {
+      engine.evaluate();
+
+      expect(mockedConsoleLog.mock.calls.length).toBe(2);
+
+      const results = mockedConsoleLog.mock.results.map(item => {
+        return item.value;
+      });
+
+      expect(results).toEqual(expect.arrayContaining([
+        'Missing <title/> in <head/>',
+        'Redundant <h1/>',
+      ]));
+    })
   });
 });

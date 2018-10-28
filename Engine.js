@@ -116,6 +116,34 @@ class Engine {
 
     return this;
   }
+
+  evaluate() {
+    /* Prepare HTML */
+
+    this.reader.read();
+
+    const html = this.reader.html;
+
+    /* Boot evaluators */
+
+    Object.keys(this.evaluators).forEach(key => {
+      this.evaluators[key].boot({html})
+    });
+
+    /* Collect defects */
+
+    const defects = [];
+
+    this.rules.forEach(rule => {
+      rule
+        .validate({evaluators: this.evaluators})
+        .forEach(defect => {
+          defects.push(defect);
+        })
+    });
+
+    return this.writer.write(defects);
+  }
 }
 
 module.exports = Engine;
