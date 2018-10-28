@@ -1,0 +1,49 @@
+Arguments: 
+  /usr/local/bin/node /usr/share/yarn/bin/yarn.js add -D vuepress@next
+
+PATH: 
+  /home/jeremy/.sdkman/candidates/gradle/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/jeremy/.config/composer/vendor/bin:/home/jeremy/.config/composer/vendor/bin
+
+Yarn version: 
+  1.10.1
+
+Node version: 
+  10.4.1
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /home/jeremy/PhpstormProjects/seo-evaluation-engine/package.json: Unexpected token } in JSON at position 285
+      at JSON.parse (<anonymous>)
+      at /usr/share/yarn/lib/cli.js:1136:59
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:98:30)
+      at /usr/share/yarn/lib/cli.js:109:13
+
+npm manifest: 
+  {
+    "name"           : "seo-evaluation-engine",
+    "version"        : "1.0.0",
+    "description"    : "An Evaluation Engine for SEO factors",
+    "main"           : "index.js",
+    "author"         : "Gulei Hu",
+    "license"        : "MIT",
+    "devDependencies": {
+      "jest"    : "^23.6.0",
+    },
+    "scripts"        : {
+      "test"      : "jest",
+      "docs:dev"  : "vuepress dev docs",
+      "docs:build": "vuepress build docs"
+    },
+    "dependencies"   : {
+      "cheerio": "^1.0.0-rc.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
