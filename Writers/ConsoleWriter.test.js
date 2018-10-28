@@ -1,7 +1,7 @@
-const ConsoleWrite = require('./ConsoleWriter');
+const ConsoleWriter = require('./ConsoleWriter');
 
 test('basic write', () => {
-  const writer = new ConsoleWrite();
+  const writer = new ConsoleWriter();
 
   const consoleLog = console.log;
 
