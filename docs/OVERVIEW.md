@@ -5,7 +5,7 @@
 ![Flow of Processing](./assets/flow.png)
 
 ## Reader
-- Handles HTML inputs and convert it to a string for further usage.
+- Handles HTML input and convert it to a string for further usage.
 - Pre-defined types:
   - StringReader
     - Read the HTML content from a string.
