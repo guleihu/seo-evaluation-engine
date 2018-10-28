@@ -77,6 +77,31 @@ describe('configure', () => {
 
     expect(engine.rules[0]).toBe(rule);
   });
+
+  test.only('construct', () => {
+    const reader = new DummyReader();
+    const writer = new DummyWriter();
+    const evaluator = new DummyEvaluator();
+    const rule = new DummyRule();
+
+    const engine = new Engine({
+      reader,
+      writer,
+      evaluators: {
+        dummy: evaluator,
+      },
+      rules     : [
+        rule,
+      ],
+    });
+
+    expect(engine.reader).toBe(reader);
+    expect(engine.writer).toBe(writer);
+    expect(Object.keys(engine.evaluators).length).toBe(1);
+    expect(engine.evaluators.dummy).toEqual(evaluator);
+    expect(engine.rules.length).toBe(1);
+    expect(engine.rules[0]).toBe(rule);
+  })
 });
 
 const testHtml = `
