@@ -1,5 +1,5 @@
 {
-  "name": "guleihu/seo-evaluation-engine",
+  "name": "@guleihu/seo-evaluation-engine",
   "version": "1.0.0",
   "description": "An Evaluation Engine for SEO defects",
   "main": "index.js",
