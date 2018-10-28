@@ -1,5 +1,6 @@
 const BaseReader = require('./Readers/BaseReader');
 const BaseWriter = require('./Writers/BaseWriter');
+const CheerioEvaluator = require('./Evaluators/CheerioEvaluator');
 
 class Engine {
   constructor(params = {}) {
@@ -65,6 +66,29 @@ class Engine {
 
   get rules() {
     return this._rules;
+  }
+
+  static create(params) {
+    const mergedParams = {
+      reader    : params.reader ? params.reader : null,
+      writer    : params.writer ? params.writer : null,
+      evaluators: {
+        cheerio: new CheerioEvaluator(),
+      },
+      rules     : params.rules ? params.rules : null,
+    };
+
+    /* Merge extra evaluators. */
+    /* Existing cheerio evaluator will be replaced if the same key is provided */
+
+    if (params.evaluators) {
+      mergedParams.evaluators = {
+        ...mergedParams.evaluators,
+        ...params.evaluators,
+      }
+    }
+
+    return new Engine(mergedParams);
   }
 
   registerEvaluator(name, evaluator) {
