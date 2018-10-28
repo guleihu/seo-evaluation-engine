@@ -1,10 +1,11 @@
+const fs = require('fs');
 const BaseWriter = require('./BaseWriter');
 
 class ConsoleWriter extends BaseWriter {
   write(lines) {
-    lines.forEach(line => {
-      console.log(line);
-    });
+    const output = lines.join("\n");
+
+    fs.writeFileSync(this.params.path, output);
   }
 }
 

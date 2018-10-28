@@ -1,7 +1,7 @@
-const ConsoleWrite = require('./ConsoleWriter');
+const ConsoleWriter = require('./ConsoleWriter');
 
 test('basic write', () => {
-  const writer = new ConsoleWrite();
+  const writer = new ConsoleWriter();
 
   const consoleLog = console.log;
 
@@ -11,7 +11,9 @@ test('basic write', () => {
 
   console.log = mockedConsoleLog;
 
-  writer.write('TEST');
+  writer.write([
+    'TEST',
+  ]);
 
   expect(mockedConsoleLog.mock.calls.length).toBe(1);
   expect(mockedConsoleLog.mock.results[0].value).toBe('TEST');
