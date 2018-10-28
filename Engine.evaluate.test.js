@@ -33,23 +33,22 @@ const expectedDefects = [
 ];
 
 test('string-in-console-out', () => {
-  const engine = Engine.create({
-    reader: new StringReader({html: testHtml}),
-    writer: new ConsoleWriter(),
-    rules,
-  });
-
-  testConsoleLog((mockedConsoleLog) => {
-    engine.evaluate();
-
-    expect(mockedConsoleLog.mock.calls.length).toBe(2);
-
-    const results = mockedConsoleLog.mock.results.map(item => {
-      return item.value;
+  const writing = () => {
+    const engine = Engine.create({
+      reader: new StringReader({html: testHtml}),
+      writer: new ConsoleWriter(),
+      rules,
     });
 
-    expect(results).toEqual(expect.arrayContaining(expectedDefects));
-  })
+    engine.evaluate();
+  };
+
+  const testing = (mockedConsoleLog, resultValues) => {
+    expect(mockedConsoleLog.mock.calls.length).toBe(2);
+    expect(resultValues).toEqual(expect.arrayContaining(expectedDefects));
+  };
+
+  testConsoleLog(writing, testing);
 });
 
 test('string-in-file-out', () => {
