@@ -2,7 +2,7 @@ const BaseReader = require('./BaseReader');
 
 class StringReader extends BaseReader {
   read() {
-    this._html = this._input.html;
+    this._html = this.params.html;
   }
 }
 
