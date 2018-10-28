@@ -1,6 +1,6 @@
 {
   "name"           : "@guleihu/seo-evaluation-engine",
-  "version"        : "1.0.0",
+  "version"        : "1.0.1",
   "description"    : "An Evaluation Engine for SEO defects",
   "main"           : "index.js",
   "author"         : "Gulei Hu",
