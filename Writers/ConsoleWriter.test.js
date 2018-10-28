@@ -11,7 +11,9 @@ test('basic write', () => {
 
   console.log = mockedConsoleLog;
 
-  writer.write('TEST');
+  writer.write([
+    'TEST',
+  ]);
 
   expect(mockedConsoleLog.mock.calls.length).toBe(1);
   expect(mockedConsoleLog.mock.results[0].value).toBe('TEST');

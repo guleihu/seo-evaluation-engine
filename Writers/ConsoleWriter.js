@@ -1,8 +1,10 @@
 const BaseWriter = require('./BaseWriter');
 
 class ConsoleWriter extends BaseWriter {
-  write(input) {
-    console.log(input);
+  write(lines) {
+    lines.forEach(line => {
+      console.log(line);
+    });
   }
 }
 
