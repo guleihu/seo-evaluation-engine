@@ -7,5 +7,7 @@ test('read', () => {
 
   reader.read();
 
-  expect(reader.html).toBe(reader.html);
+  const html = '<html><body></body></html>';
+
+  expect(reader.html).toBe(html);
 });

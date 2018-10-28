@@ -9,7 +9,7 @@ class FileReader extends BaseReader {
       throw 'Missing parameter: path';
     }
 
-    this._html = fs.readFileSync(path, 'utf8');
+    this.html = fs.readFileSync(path, 'utf8');
   }
 }
 
