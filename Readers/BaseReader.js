@@ -8,6 +8,10 @@ class BaseReader {
     return this._html;
   }
 
+  set html(val) {
+    this._html = val;
+  }
+
   get params() {
     return this._params;
   }
