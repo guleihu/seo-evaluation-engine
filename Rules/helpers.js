@@ -1,6 +1,6 @@
 const CheerioEvaluator = require('../Evaluators/CheerioEvaluator');
 
-module.exports.validate = (html, rule) => {
+module.exports.evaluate = (html, rule) => {
   /* Boot evaluators */
 
   const evaluators = {
@@ -13,5 +13,5 @@ module.exports.validate = (html, rule) => {
 
   /* Validate */
 
-  return rule.validate({evaluators});
+  return rule.evaluate({evaluators});
 };

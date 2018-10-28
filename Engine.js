@@ -130,7 +130,7 @@ class Engine {
 
     this.rules.forEach(rule => {
       rule
-        .validate({evaluators: this.evaluators})
+        .evaluate({evaluators: this.evaluators})
         .forEach(defect => {
           defects.push(defect);
         })

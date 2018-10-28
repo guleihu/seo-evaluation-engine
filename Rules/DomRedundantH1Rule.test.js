@@ -10,7 +10,7 @@ test('validate:valid', () => {
 </html>  
 `;
 
-  const defects = helper.validate(htmlValid, new DomRedundantH1Rule());
+  const defects = helper.evaluate(htmlValid, new DomRedundantH1Rule());
 
   expect(defects).toEqual([]);
 });
@@ -25,7 +25,7 @@ test('validate:invalid', () => {
 </html>  
 `;
 
-  const defects = helper.validate(htmlInvalid, new DomRedundantH1Rule());
+  const defects = helper.evaluate(htmlInvalid, new DomRedundantH1Rule());
 
   expect(defects.length).toBe(1);
   expect(defects[0] = 'Redundant <h1/>');
