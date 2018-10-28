@@ -1,7 +1,7 @@
 const BaseRule = require('./BaseRule');
 
 class DomAMissingRelRule extends BaseRule {
-  validate({evaluators}) {
+  evaluate({evaluators}) {
     const count = evaluators.cheerio.countTagsMissingAttr('a', 'rel');
 
     if (count < 1) {

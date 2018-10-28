@@ -9,7 +9,7 @@ class DomTooManyStrongRule extends BaseRule {
     super(params);
   }
 
-  validate({evaluators}) {
+  evaluate({evaluators}) {
     const max = this.params.max;
 
     if (isNaN(max)) {
