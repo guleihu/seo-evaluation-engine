@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SEO Evaluation Engine | Extending Functionality</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/seo-evaluation-engine/assets/css/6.styles.65a4d92e.css" as="style"><link rel="preload" href="/seo-evaluation-engine/assets/js/app.00c583af.js" as="script"><link rel="preload" href="/seo-evaluation-engine/assets/js/5.5290df3a.js" as="script"><link rel="prefetch" href="/seo-evaluation-engine/assets/js/3.3e60d374.js"><link rel="prefetch" href="/seo-evaluation-engine/assets/js/0.ca0923c5.js"><link rel="prefetch" href="/seo-evaluation-engine/assets/js/1.4b5318da.js"><link rel="prefetch" href="/seo-evaluation-engine/assets/js/2.fe423fee.js"><link rel="prefetch" href="/seo-evaluation-engine/assets/js/4.0f59d362.js">
+    <link rel="stylesheet" href="/seo-evaluation-engine/assets/css/6.styles.65a4d92e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/seo-evaluation-engine/" class="home-link router-link-active"><!----><span class="site-name">
+      SEO Evaluation Engine
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><!----></div></header><div class="sidebar-mask"></div><div class="sidebar"><!----><ul class="sidebar-links"><li><a href="/seo-evaluation-engine/" class="sidebar-link">Introduction</a></li><li><a href="/seo-evaluation-engine/GETTING_STARTED.html" class="sidebar-link">Getting Started</a></li><li><a href="/seo-evaluation-engine/OVERVIEW.html" class="sidebar-link">Overview</a></li><li><a href="/seo-evaluation-engine/USAGE.html" class="sidebar-link">Usage</a></li><li><a href="/seo-evaluation-engine/EXTENDING_FUNCTIONALITY.html" class="active sidebar-link">Extending Functionality</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/seo-evaluation-engine/EXTENDING_FUNCTIONALITY.html#create-a-reader" class="sidebar-link">Create a Reader</a></li><li class="sidebar-sub-header"><a href="/seo-evaluation-engine/EXTENDING_FUNCTIONALITY.html#create-an-evaluator" class="sidebar-link">Create an Evaluator</a></li><li class="sidebar-sub-header"><a href="/seo-evaluation-engine/EXTENDING_FUNCTIONALITY.html#create-a-rule" class="sidebar-link">Create a Rule</a></li><li class="sidebar-sub-header"><a href="/seo-evaluation-engine/EXTENDING_FUNCTIONALITY.html#create-a-writer" class="sidebar-link">Create a Writer</a></li></ul></li><li><a href="/seo-evaluation-engine/TESTING.html" class="sidebar-link">Testing</a></li></ul></div><div class="page"><div class="content"><h1 id="extending-functionality"><a href="#extending-functionality" aria-hidden="true" class="header-anchor">#</a> Extending Functionality</h1><h2 id="create-a-reader"><a href="#create-a-reader" aria-hidden="true" class="header-anchor">#</a> Create a Reader</h2><p>Take <strong>FileReader</strong> as example:</p><pre class="language-javascript"><code><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> BaseReader <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@guleihu/seo-evaluation-engine/Readers/BaseReader'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">FileReader</span> <span class="token keyword">extends</span> <span class="token class-name">BaseReader</span> <span class="token punctuation">{</span>
+  <span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">/* this.params is what being filled in to the constructor */</span>
+    <span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>params<span class="token punctuation">.</span>path<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>path<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">throw</span> <span class="token string">'Missing parameter: path'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/* Put the string of HTML to this.html so it can be picked up later */</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>html <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> <span class="token string">'utf8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h2 id="create-an-evaluator"><a href="#create-an-evaluator" aria-hidden="true" class="header-anchor">#</a> Create an Evaluator</h2><p>Take <strong>CheerioEvaluator</strong> as example:</p><pre class="language-javascript"><code><span class="token keyword">const</span> cheerio <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cheerio'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> BaseEvaluator <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@guleihu/seo-evaluation-engine/Evaluators/BaseEvaluator'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">CheerioEvaluator</span> <span class="token keyword">extends</span> <span class="token class-name">BaseEvaluator</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* Customizing constructor. Otherwise it will simply store params in place */</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>params <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span>cheerio <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* Special cheerio instance to be used in Rules */</span>
+  <span class="token keyword">get</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>cheerio<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* Evaluators will be booted right before Rules evaluating anything */</span>
+  <span class="token function">boot</span><span class="token punctuation">(</span><span class="token punctuation">{</span>html<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>cheerio <span class="token operator">=</span> cheerio<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>html<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* Possible to create any useful methods to the class */</span>
+  <span class="token function">countTagsMissingAttr</span><span class="token punctuation">(</span>tag<span class="token punctuation">,</span> attr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span>tag<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> tagEl<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> attrText <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span>tagEl<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span>attr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> attrText <span class="token operator">!==</span> <span class="token string">'string'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        count<span class="token operator">++</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>attrText<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        count<span class="token operator">++</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> count<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h2 id="create-a-rule"><a href="#create-a-rule" aria-hidden="true" class="header-anchor">#</a> Create a Rule</h2><p>Take <strong>DomHeadCheckRule</strong> as example:</p><pre class="language-javascript"><code><span class="token keyword">const</span> BaseRule <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@guleihu/seo-evaluation-engine/Rules/BaseRule'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">DomHeadCheckRule</span> <span class="token keyword">extends</span> <span class="token class-name">BaseRule</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* evaluators injected by Engine */</span>
+  <span class="token function">evaluate</span><span class="token punctuation">(</span><span class="token punctuation">{</span>evaluators<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> defects <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">/* The name of evaluators.* is determined by the key provided in Engine.registerEvaluator(key, evaluator) */</span>       
+    <span class="token keyword">const</span> $ <span class="token operator">=</span> evaluators<span class="token punctuation">.</span>cheerio<span class="token punctuation">.</span>$<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'head title'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      defects<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'Missing &lt;title/&gt; in &lt;head/&gt;'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'head meta[name=description]'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      defects<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'Missing &lt;meta name=&quot;description&quot;/&gt; in &lt;head/&gt;'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'head meta[name=keywords]'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      defects<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'Missing &lt;meta name=&quot;keywords&quot;/&gt; in &lt;head/&gt;'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">/* Possible add other tests such as detecting missing meta tag of robots type  */</span>
+
+    <span class="token comment">/* Return any defect as string in an array */</span>
+    <span class="token keyword">return</span> defects<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h2 id="create-a-writer"><a href="#create-a-writer" aria-hidden="true" class="header-anchor">#</a> Create a Writer</h2><p>Take <strong>ConsoleWriter</strong> as example:</p><pre class="language-javascript"><code><span class="token keyword">const</span> BaseWriter <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@guleihu/seo-evaluation-engine/Writers/BaseWriter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ConsoleWriter</span> <span class="token keyword">extends</span> <span class="token class-name">BaseWriter</span> <span class="token punctuation">{</span>
+  <span class="token function">write</span><span class="token punctuation">(</span>lines<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">/* Anything needed to be done for output. Return a promise if async operations involved */</span>
+    lines<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>line <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><!----><div class="content page-nav"><p class="inner"><span class="prev">
+        ← <a href="/seo-evaluation-engine/USAGE.html" class="prev">
+          Usage
+        </a></span><span class="next"><a href="/seo-evaluation-engine/TESTING.html">
+          Testing
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/seo-evaluation-engine/assets/js/5.5290df3a.js" defer></script><script src="/seo-evaluation-engine/assets/js/app.00c583af.js" defer></script>
+  </body>
+</html>

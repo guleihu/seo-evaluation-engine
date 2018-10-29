@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SEO Evaluation Engine | Getting Started</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/seo-evaluation-engine/assets/css/6.styles.65a4d92e.css" as="style"><link rel="preload" href="/seo-evaluation-engine/assets/js/app.00c583af.js" as="script"><link rel="preload" href="/seo-evaluation-engine/assets/js/4.0f59d362.js" as="script"><link rel="prefetch" href="/seo-evaluation-engine/assets/js/3.3e60d374.js"><link rel="prefetch" href="/seo-evaluation-engine/assets/js/0.ca0923c5.js"><link rel="prefetch" href="/seo-evaluation-engine/assets/js/1.4b5318da.js"><link rel="prefetch" href="/seo-evaluation-engine/assets/js/2.fe423fee.js"><link rel="prefetch" href="/seo-evaluation-engine/assets/js/5.5290df3a.js">
+    <link rel="stylesheet" href="/seo-evaluation-engine/assets/css/6.styles.65a4d92e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/seo-evaluation-engine/" class="home-link router-link-active"><!----><span class="site-name">
+      SEO Evaluation Engine
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><!----></div></header><div class="sidebar-mask"></div><div class="sidebar"><!----><ul class="sidebar-links"><li><a href="/seo-evaluation-engine/" class="sidebar-link">Introduction</a></li><li><a href="/seo-evaluation-engine/GETTING_STARTED.html" class="active sidebar-link">Getting Started</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/seo-evaluation-engine/GETTING_STARTED.html#install" class="sidebar-link">Install</a></li><li class="sidebar-sub-header"><a href="/seo-evaluation-engine/GETTING_STARTED.html#configure-run" class="sidebar-link">Configure &amp; Run</a></li><li class="sidebar-sub-header"><a href="/seo-evaluation-engine/GETTING_STARTED.html#output" class="sidebar-link">Output</a></li></ul></li><li><a href="/seo-evaluation-engine/OVERVIEW.html" class="sidebar-link">Overview</a></li><li><a href="/seo-evaluation-engine/USAGE.html" class="sidebar-link">Usage</a></li><li><a href="/seo-evaluation-engine/EXTENDING_FUNCTIONALITY.html" class="sidebar-link">Extending Functionality</a></li><li><a href="/seo-evaluation-engine/TESTING.html" class="sidebar-link">Testing</a></li></ul></div><div class="page"><div class="content"><h1 id="getting-started"><a href="#getting-started" aria-hidden="true" class="header-anchor">#</a> Getting Started</h1><h2 id="install"><a href="#install" aria-hidden="true" class="header-anchor">#</a> Install</h2><pre class="language-bash"><code>yarn add @guleihu/seo-evaluation-engine
+</code></pre><h2 id="configure-run"><a href="#configure-run" aria-hidden="true" class="header-anchor">#</a> Configure &amp; Run</h2><pre class="language-javascript"><code><span class="token keyword">const</span> Engine <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@guleihu/seo-evaluation-engine/Engine'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> StringReader <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@guleihu/seo-evaluation-engine/Readers/StringReader'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> ConsoleWriter <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@guleihu/seo-evaluation-engine/Writers/ConsoleWriter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> DomHeadCheckRule <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@guleihu/seo-evaluation-engine/Rules/DomHeadCheckRule'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> html <span class="token operator">=</span> <span class="token template-string"><span class="token string">`
+&lt;html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;
+`</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> engine <span class="token operator">=</span> Engine<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  reader<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">StringReader</span><span class="token punctuation">(</span><span class="token punctuation">{</span>html<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  writer<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">ConsoleWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  rules <span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">new</span> <span class="token class-name">DomHeadCheckRule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+engine<span class="token punctuation">.</span><span class="token function">evaluate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><h2 id="output"><a href="#output" aria-hidden="true" class="header-anchor">#</a> Output</h2><pre><code>Missing &lt;title/&gt; in &lt;head/&gt;
+Missing &lt;meta name=&quot;description&quot;/&gt; in &lt;head/&gt;
+Missing &lt;meta name=&quot;keywords&quot;/&gt; in &lt;head/&gt;
+</code></pre></div><!----><div class="content page-nav"><p class="inner"><span class="prev">
+        ← <a href="/seo-evaluation-engine/" class="prev router-link-active">
+          Introduction
+        </a></span><span class="next"><a href="/seo-evaluation-engine/OVERVIEW.html">
+          Overview
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/seo-evaluation-engine/assets/js/4.0f59d362.js" defer></script><script src="/seo-evaluation-engine/assets/js/app.00c583af.js" defer></script>
+  </body>
+</html>
